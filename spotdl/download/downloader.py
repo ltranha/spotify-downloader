@@ -189,9 +189,7 @@ class Downloader:
                 raise DownloaderError(f"Invalid lyrics provider: {lyrics_provider}")
             if lyrics_provider == "genius":
                 access_token = self.settings.get("genius_token")
-                if not access_token:
-                    raise DownloaderError("Genius token not found in settings")
-                self.lyrics_providers.append(Genius(access_token))
+                self.lyrics_providers.append(Genius(access_token or "dummy_token"))
             else:
                 self.lyrics_providers.append(lyrics_class())
 
